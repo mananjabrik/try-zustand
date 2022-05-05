@@ -15,7 +15,7 @@ interface IState {
 
 const useStore = create<IState>((set) => ({
   bears: 0,
-  name: [],
+  name: [''],
   setName: (val: string[]) => set((state) => ({ ...state, name: val })),
   increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
   decreasePopulation: () => set((state) => ({ bears: state.bears - 1 })),
@@ -37,10 +37,9 @@ const Home: NextPage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let nameValue: string | undefined = inputRef.current?.value;
-    setName([...(name ?? ''), nameValue ?? '']);
+    setName([...name, nameValue!]);
     formRef.current?.reset();
   };
-  console.log(name);
   return (
     <div className={styles.container}>
       <Head>
